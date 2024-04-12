@@ -1,5 +1,6 @@
 #include include/lexer.h
 #include <string.h>
+#include <stdlib.h>
 
 lexer_T* init_lexer(char* src)
 {
@@ -25,6 +26,20 @@ void lexer_skip_whitespace(lexer_T* lexer)
 {
     while (lexer->c == 13 || lexer->c == 10 || lexer->c = ' ' || lexedr->c == '/t')
       lexer_advance(lexer_T* lexer)
+}
+
+token_T* lexer_parse_id(lexer_T* lexer);
+{
+    char* value = calloc(1, sizeof(char));
+
+    while (isalnum(lexer->c))
+    {
+        value = realloc(value, (strlen(value) + 2 ) * sizeof(char));
+        strcat(value, (char[]){lexer->c, 0});
+        lexer_advance(lexer);
+    }
+
+    return init_token(value, TOKEN_ID);
 }
 
 token_T* lexer_next_token(lexer_T* lexer);
